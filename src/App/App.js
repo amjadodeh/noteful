@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import ErrorBoundary from '../ErrorBoundary';
 import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
@@ -62,10 +63,15 @@ class App extends Component {
   renderNavRoutes() {
     return (
       <>
-        {['/', '/folder/:folderId'].map((path) => (
-          <Route exact key={path} path={path} component={NoteListNav} />
-        ))}
-        <Route path='/note/:noteId' component={NotePageNav} />
+        <ErrorBoundary>
+          {['/', '/folder/:folderId'].map((path) => (
+            <Route exact key={path} path={path} component={NoteListNav} />
+          ))}
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Route path='/note/:noteId' component={NotePageNav} />
+        </ErrorBoundary>
       </>
     );
   }
@@ -73,12 +79,23 @@ class App extends Component {
   renderMainRoutes() {
     return (
       <>
-        {['/', '/folder/:folderId'].map((path) => (
-          <Route exact key={path} path={path} component={NoteListMain} />
-        ))}
-        <Route path='/note/:noteId' component={NotePageMain} />
-        <Route path='/add-folder' component={AddFolder} />
-        <Route path='/add-note' component={AddNote} />
+        <ErrorBoundary>
+          {['/', '/folder/:folderId'].map((path) => (
+            <Route exact key={path} path={path} component={NoteListMain} />
+          ))}
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Route path='/note/:noteId' component={NotePageMain} />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Route path='/add-folder' component={AddFolder} />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Route path='/add-note' component={AddNote} />
+        </ErrorBoundary>
       </>
     );
   }
