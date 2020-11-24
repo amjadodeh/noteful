@@ -46,3 +46,7 @@
   background-color: #29862e;
   color: white;
 }
+
+#folder-select {
+  height: fit-content;
+}
