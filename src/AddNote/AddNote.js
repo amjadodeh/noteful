@@ -67,6 +67,13 @@ class AddNote extends React.Component {
     }
   }
 
+  validateContent() {
+    const content = this.state.content.value.trim();
+    if (content.length === 0) {
+      return 'Please type your note content';
+    }
+  }
+
   validateFolderId() {
     const folderId = this.state.folderId.value.trim();
     if (folderId === null || folderId === '...') {
@@ -98,7 +105,10 @@ class AddNote extends React.Component {
             }
           >
             <label htmlFor='content-input'>Content</label>
-            <textarea id='content-input' name='content' />
+            <textarea id='content-input' name='content' required />
+            {this.state.content.touched && (
+              <ValidationError message={this.validateContent()} />
+            )}
           </div>
           <div
             className='field'
