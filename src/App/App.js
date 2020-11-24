@@ -34,8 +34,6 @@ class App extends Component {
       })
       .then(([notes, folders]) => {
         this.setState({ notes, folders });
-        console.log(notes);
-        console.log(folders);
       })
       .catch((error) => {
         console.error({ error });
@@ -105,7 +103,7 @@ class App extends Component {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
-      AddFolder: this.handleAddFolder,
+      addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
     };
     return (

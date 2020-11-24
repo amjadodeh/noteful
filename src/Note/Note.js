@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ApiContext from '../ApiContext';
+import PropTypes from 'prop-types';
 import config from '../config';
 import './Note.css';
 
@@ -60,3 +61,10 @@ export default class Note extends React.Component {
     );
   }
 }
+
+Note.propTypes = {
+  onDeleteNote: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  modified: PropTypes.string.isRequired,
+};
