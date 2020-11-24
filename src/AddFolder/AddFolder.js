@@ -3,6 +3,7 @@ import NotefulForm from '../NotefulForm/NotefulForm';
 import ApiContext from '../ApiContext';
 import ValidationError from '../ValidationError';
 import config from '../config';
+import './AddFolder.css';
 
 class AddFolder extends React.Component {
   state = {
