@@ -17,37 +17,45 @@ class AddFolder extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const folder = {
-      name: this.state.folderName.value,
-    };
-    fetch(`${config.API_ENDPOINT}/folders`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(folder),
-    })
-      .then((res) => {
-        if (!res.ok) return res.json().then((e) => Promise.reject(e));
-        return res.json();
+    if (!this.validateName()) {
+      const folder = {
+        name: this.state.folderName.value,
+      };
+      fetch(`${config.API_ENDPOINT}/folders`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(folder),
       })
-      .then((folder) => {
-        this.context.addFolder(folder);
-        this.props.history.push(`/`);
-      })
-      .catch((error) => {
-        console.error({ error });
-      });
+        .then((res) => {
+          if (!res.ok) return res.json().then((e) => Promise.reject(e));
+          return res.json();
+        })
+        .then((folder) => {
+          this.context.addFolder(folder);
+          this.props.history.push(`/`);
+        })
+        .catch((error) => {
+          console.error({ error });
+        });
+    }
   };
 
   updateState = (name, val) => {
     this.setState({ [name]: { value: val, touched: true } });
   };
 
-  validateState() {
+  validateName() {
     const name = this.state.folderName.value.trim();
+    const folders = this.context.folders;
     if (name.length === 0) {
       return 'Name must uh... exist!';
+    }
+    for (let i = 0; i < folders.length; i++) {
+      if (folders[i].name === name) {
+        return 'This folder name already exists.';
+      }
     }
   }
 
@@ -65,7 +73,7 @@ class AddFolder extends React.Component {
             <label htmlFor='name-input'>Name</label>
             <input type='text' id='name-input' name='folderName' required />
             {this.state.folderName.touched && (
-              <ValidationError message={this.validateState()} />
+              <ValidationError message={this.validateName()} />
             )}
           </div>
           <div className='buttons'>
