@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import NotefulForm from '../NotefulForm/NotefulForm';
 import ApiContext from '../ApiContext';
 import ValidationError from '../ValidationError';
@@ -84,5 +86,11 @@ class AddFolder extends React.Component {
     );
   }
 }
+
+AddFolder.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object,
+  match: PropTypes.object,
+};
 
 export default AddFolder;

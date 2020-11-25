@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import NotefulForm from '../NotefulForm/NotefulForm';
 import ApiContext from '../ApiContext';
 import ValidationError from '../ValidationError';
@@ -137,5 +139,11 @@ class AddNote extends React.Component {
     );
   }
 }
+
+AddNote.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object,
+  match: PropTypes.object,
+};
 
 export default AddNote;
