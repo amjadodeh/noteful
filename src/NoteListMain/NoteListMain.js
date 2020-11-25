@@ -14,6 +14,7 @@ export default class NoteListMain extends React.Component {
       params: {},
     },
   };
+
   static contextType = ApiContext;
 
   render() {

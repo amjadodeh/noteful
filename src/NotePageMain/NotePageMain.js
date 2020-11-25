@@ -10,6 +10,7 @@ export default class NotePageMain extends React.Component {
       params: {},
     },
   };
+
   static contextType = ApiContext;
 
   handleDeleteNote = (noteId) => {
