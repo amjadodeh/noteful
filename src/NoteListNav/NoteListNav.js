@@ -16,8 +16,8 @@ export default class NoteListNav extends React.Component {
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
           {folders.map((folder) => (
-            <ErrorBoundary>
-              <li key={folder.id}>
+            <li key={folder.id}>
+              <ErrorBoundary>
                 <NavLink
                   className='NoteListNav__folder-link'
                   to={`/folder/${folder.id}`}
@@ -27,8 +27,8 @@ export default class NoteListNav extends React.Component {
                   </span>
                   {folder.name}
                 </NavLink>
-              </li>
-            </ErrorBoundary>
+              </ErrorBoundary>
+            </li>
           ))}
         </ul>
         <div className='NoteListNav__button-wrapper'>
