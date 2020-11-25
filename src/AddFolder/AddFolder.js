@@ -39,7 +39,7 @@ class AddFolder extends React.Component {
           this.props.history.push(`/`);
         })
         .catch((error) => {
-          console.error({ error });
+          throw new Error(error);
         });
     }
   };
