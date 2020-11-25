@@ -142,8 +142,6 @@ class AddNote extends React.Component {
 
 AddNote.propTypes = {
   history: PropTypes.object.isRequired,
-  location: PropTypes.object,
-  match: PropTypes.object,
 };
 
 export default AddNote;

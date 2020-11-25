@@ -16,6 +16,5 @@ export default function NotefulForm(props) {
 }
 
 NotefulForm.propTypes = {
-  children: PropTypes.array,
-  onSubmit: PropTypes.func,
+  children: PropTypes.array.isRequired,
 };
