@@ -11,6 +11,7 @@ export default class Note extends React.Component {
   static defaultProps = {
     onDeleteNote: () => {},
   };
+
   static contextType = ApiContext;
 
   handleClickDelete = (e) => {
@@ -63,8 +64,8 @@ export default class Note extends React.Component {
 }
 
 Note.propTypes = {
-  onDeleteNote: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   modified: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onDeleteNote: PropTypes.func.isRequired,
 };
