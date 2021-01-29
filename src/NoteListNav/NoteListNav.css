@@ -43,13 +43,19 @@
   font-size: 10px;
 }
 
-/* .Folder__delete {
-  padding: 5px;
+.Folder__delete {
+  padding: 14px 2px;
   background-color: #002152;
   border: 0;
   color: #bdbcbc;
   float: right;
-  font-size: 11px;
+  font-size: 10px;
   position: relative;
-  transform-origin: right top;
-} */
+}
+
+.Folder__delete:hover {
+  background-color: #bd0909;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
