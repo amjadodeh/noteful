@@ -1,13 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import Note from '../Note/Note';
 import CircleButton from '../CircleButton/CircleButton';
 import ApiContext from '../ApiContext';
 import { getNotesForFolder } from '../notes-helpers';
-import ErrorBoundary from '../ErrorBoundary';
 import './NoteListMain.css';
 
 export default class NoteListMain extends React.Component {
@@ -16,7 +13,6 @@ export default class NoteListMain extends React.Component {
       params: {},
     },
   };
-
   static contextType = ApiContext;
 
   render() {
@@ -24,24 +20,26 @@ export default class NoteListMain extends React.Component {
     const { notes = [] } = this.context;
     const notesForFolder = getNotesForFolder(notes, folderId);
     return (
-      <section className='NoteListMain'>
+      <section className="NoteListMain">
         <ul>
           {notesForFolder.map((note) => (
             <li key={note.id}>
-              <ErrorBoundary>
-                <Note id={note.id} name={note.name} modified={note.modified} />
-              </ErrorBoundary>
+              <Note
+                id={note.id}
+                name={note.note_name}
+                modified={note.modified}
+              />
             </li>
           ))}
         </ul>
-        <div className='NoteListMain__button-container'>
+        <div className="NoteListMain__button-container">
           <CircleButton
             tag={Link}
-            to='/add-note'
-            type='button'
-            className='NoteListMain__add-note-button'
+            to="/add-note"
+            type="button"
+            className="NoteListMain__add-note-button"
           >
-            <FontAwesomeIcon icon='plus' />
+            <FontAwesomeIcon icon="plus" />
             <br />
             Note
           </CircleButton>
@@ -50,7 +48,3 @@ export default class NoteListMain extends React.Component {
     );
   }
 }
-
-NoteListMain.propTypes = {
-  match: PropTypes.object.isRequired,
-};

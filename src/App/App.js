@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import ErrorBoundary from '../ErrorBoundary';
 import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
-
 import ApiContext from '../ApiContext';
 import config from '../config';
 import './App.css';
@@ -61,15 +58,12 @@ class App extends Component {
   renderNavRoutes() {
     return (
       <>
-        <ErrorBoundary>
-          {['/', '/folder/:folderId'].map((path) => (
-            <Route exact key={path} path={path} component={NoteListNav} />
-          ))}
-        </ErrorBoundary>
-
-        <ErrorBoundary>
-          <Route path='/note/:noteId' component={NotePageNav} />
-        </ErrorBoundary>
+        {['/', '/folder/:folderId'].map((path) => (
+          <Route exact key={path} path={path} component={NoteListNav} />
+        ))}
+        <Route path="/note/:noteId" component={NotePageNav} />
+        <Route path="/add-folder" component={NotePageNav} />
+        <Route path="/add-note" component={NotePageNav} />
       </>
     );
   }
@@ -77,23 +71,12 @@ class App extends Component {
   renderMainRoutes() {
     return (
       <>
-        <ErrorBoundary>
-          {['/', '/folder/:folderId'].map((path) => (
-            <Route exact key={path} path={path} component={NoteListMain} />
-          ))}
-        </ErrorBoundary>
-
-        <ErrorBoundary>
-          <Route path='/note/:noteId' component={NotePageMain} />
-        </ErrorBoundary>
-
-        <ErrorBoundary>
-          <Route path='/add-folder' component={AddFolder} />
-        </ErrorBoundary>
-
-        <ErrorBoundary>
-          <Route path='/add-note' component={AddNote} />
-        </ErrorBoundary>
+        {['/', '/folder/:folderId'].map((path) => (
+          <Route exact key={path} path={path} component={NoteListMain} />
+        ))}
+        <Route path="/note/:noteId" component={NotePageMain} />
+        <Route path="/add-folder" component={AddFolder} />
+        <Route path="/add-note" component={AddNote} />
       </>
     );
   }
@@ -102,21 +85,21 @@ class App extends Component {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.handleDeleteNote,
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
+      deleteNote: this.handleDeleteNote,
     };
     return (
       <ApiContext.Provider value={value}>
-        <div className='App'>
-          <nav className='App__nav'>{this.renderNavRoutes()}</nav>
-          <header className='App__header'>
+        <div className="App">
+          <nav className="App__nav">{this.renderNavRoutes()}</nav>
+          <header className="App__header">
             <h1>
-              <Link to='/'>Noteful</Link>{' '}
-              <FontAwesomeIcon icon='check-double' />
+              <Link to="/">Noteful</Link>{' '}
+              <FontAwesomeIcon icon="check-double" />
             </h1>
           </header>
-          <main className='App__main'>{this.renderMainRoutes()}</main>
+          <main className="App__main">{this.renderMainRoutes()}</main>
         </div>
       </ApiContext.Provider>
     );

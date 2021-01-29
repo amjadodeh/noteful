@@ -37,7 +37,3 @@
   height: calc(100vh - 120px);
   overflow: auto;
 }
-
-.Error__Boundary {
-  margin: 15px;
-}

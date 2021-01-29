@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CircleButton from '../CircleButton/CircleButton';
 import ApiContext from '../ApiContext';
 import { countNotesForFolder } from '../notes-helpers';
-import ErrorBoundary from '../ErrorBoundary';
 import './NoteListNav.css';
 
 export default class NoteListNav extends React.Component {
@@ -13,32 +12,30 @@ export default class NoteListNav extends React.Component {
   render() {
     const { folders = [], notes = [] } = this.context;
     return (
-      <div className='NoteListNav'>
-        <ul className='NoteListNav__list'>
+      <div className="NoteListNav">
+        <ul className="NoteListNav__list">
           {folders.map((folder) => (
             <li key={folder.id}>
-              <ErrorBoundary>
-                <NavLink
-                  className='NoteListNav__folder-link'
-                  to={`/folder/${folder.id}`}
-                >
-                  <span className='NoteListNav__num-notes'>
-                    {countNotesForFolder(notes, folder.id)}
-                  </span>
-                  {folder.name}
-                </NavLink>
-              </ErrorBoundary>
+              <NavLink
+                className="NoteListNav__folder-link"
+                to={`/folder/${folder.id}`}
+              >
+                <span className="NoteListNav__num-notes">
+                  {countNotesForFolder(notes, folder.id)}
+                </span>
+                {folder.folder_name}
+              </NavLink>
             </li>
           ))}
         </ul>
-        <div className='NoteListNav__button-wrapper'>
+        <div className="NoteListNav__button-wrapper">
           <CircleButton
             tag={Link}
-            to='/add-folder'
-            type='button'
-            className='NoteListNav__add-folder-button'
+            to="/add-folder"
+            type="button"
+            className="NoteListNav__add-folder-button"
           >
-            <FontAwesomeIcon icon='plus' />
+            <FontAwesomeIcon icon="plus" />
             <br />
             Folder
           </CircleButton>

@@ -1,3 +1,7 @@
 .AddFolder {
-  padding: 10px;
+  color: #dedede;
+}
+
+.AddFolder h2 {
+  margin-left: 16px;
 }
