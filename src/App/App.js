@@ -55,6 +55,12 @@ class App extends Component {
     });
   };
 
+  // handleDeleteFolder = (folderId) => {
+  //   this.setState({
+  //     folders: this.state.folders.filter((folder) => folder.id !== folderId),
+  //   });
+  // };
+
   renderNavRoutes() {
     return (
       <>
