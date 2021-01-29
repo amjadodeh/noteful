@@ -4,35 +4,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CircleButton from '../CircleButton/CircleButton';
 import ApiContext from '../ApiContext';
 import { countNotesForFolder } from '../notes-helpers';
+import config from '../config';
 import './NoteListNav.css';
 
 export default class NoteListNav extends React.Component {
   static contextType = ApiContext;
 
-  // WILL ADD DELETE FOLDER
-  // handleClickDelete = (e) => {
-  //   e.preventDefault();
-  //   const noteId = this.props.id;
+  handleClickDelete = (e) => {
+    e.preventDefault();
+    const folderId = e.currentTarget.value;
 
-  //   fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (!res.ok) return res.json().then((e) => Promise.reject(e));
-  //       return res.json();
-  //     })
-  //     .then(() => {
-  //       this.context.deleteFolder(noteId);
-  //       // allow parent to perform extra behaviour
-  //       this.props.onDeleteNote(noteId);
-  //     })
-  //     .catch((error) => {
-  //       console.error({ error });
-  //     });
-  // };
+    fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (!res.ok) return res.json().then((e) => Promise.reject(e));
+        return res.json();
+      })
+      .then(() => {
+        this.context.deleteFolder(folderId);
+      })
+      .catch((error) => {
+        console.error({ error });
+      });
+  };
 
   render() {
     const { folders = [], notes = [] } = this.context;
@@ -41,6 +39,14 @@ export default class NoteListNav extends React.Component {
         <ul className="NoteListNav__list">
           {folders.map((folder) => (
             <li key={folder.id}>
+              <button
+                className="Folder__delete"
+                type="button"
+                value={folder.id}
+                onClick={this.handleClickDelete}
+              >
+                <FontAwesomeIcon icon="trash-alt" />
+              </button>
               <NavLink
                 className="NoteListNav__folder-link"
                 to={`/folder/${folder.id}`}
@@ -48,14 +54,6 @@ export default class NoteListNav extends React.Component {
                 <span className="NoteListNav__num-notes">
                   {countNotesForFolder(notes, folder.id)}
                 </span>
-
-                {/* <button
-                  className="Folder__delete"
-                  type="button"
-                  onClick={this.handleClickDelete}
-                >
-                  <FontAwesomeIcon icon="trash-alt" />
-                </button> */}
 
                 {folder.folder_name}
               </NavLink>

@@ -55,11 +55,11 @@ class App extends Component {
     });
   };
 
-  // handleDeleteFolder = (folderId) => {
-  //   this.setState({
-  //     folders: this.state.folders.filter((folder) => folder.id !== folderId),
-  //   });
-  // };
+  handleDeleteFolder = (folderId) => {
+    this.setState({
+      folders: this.state.folders.filter((folder) => folder.id !== folderId),
+    });
+  };
 
   renderNavRoutes() {
     return (
@@ -94,6 +94,7 @@ class App extends Component {
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
       deleteNote: this.handleDeleteNote,
+      deleteFolder: this.handleDeleteFolder,
     };
     return (
       <ApiContext.Provider value={value}>
