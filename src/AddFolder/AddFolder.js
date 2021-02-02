@@ -12,6 +12,10 @@ export default class AddFolder extends Component {
   };
   static contextType = ApiContext;
 
+  state = {
+    alreadyExists: '',
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const folder = {
@@ -25,7 +29,12 @@ export default class AddFolder extends Component {
       body: JSON.stringify(folder),
     })
       .then((res) => {
-        if (!res.ok) return res.json().then((e) => Promise.reject(e));
+        console.log();
+        if (!res.ok) {
+          this.setState({ alreadyExists: 'Folder already exists' });
+          return res.json().then((e) => Promise.reject(e));
+        }
+        this.setState({ alreadyExists: '' });
         return res.json();
       })
       .then((folder) => {
@@ -44,7 +53,13 @@ export default class AddFolder extends Component {
         <NotefulForm onSubmit={this.handleSubmit}>
           <div className="field">
             <label htmlFor="folder-name-input">Name</label>
-            <input type="text" id="folder-name-input" name="folder-name" />
+            <input
+              type="text"
+              id="folder-name-input"
+              name="folder-name"
+              required
+            />
+            {this.state.alreadyExists}
           </div>
           <div className="buttons">
             <button type="submit">Add folder</button>

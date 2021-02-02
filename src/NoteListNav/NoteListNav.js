@@ -22,7 +22,7 @@ export default class NoteListNav extends React.Component {
     })
       .then((res) => {
         if (!res.ok) return res.json().then((e) => Promise.reject(e));
-        return res.json();
+        return folderId;
       })
       .then(() => {
         this.context.deleteFolder(folderId);
