@@ -58,10 +58,10 @@ class App extends Component {
   handleDeleteFolder = (folderId) => {
     this.setState({
       folders: this.state.folders.filter(
-        (folder) => Number(folder.id) !== folderId
+        (folder) => Number(folder.id) !== Number(folderId)
       ),
       notes: this.state.notes.filter(
-        (note) => Number(note.folder_id) !== folderId
+        (note) => Number(note.folder_id) !== Number(folderId)
       ),
     });
   };
