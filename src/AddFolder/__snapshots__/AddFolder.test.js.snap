@@ -21,6 +21,7 @@ exports[`AddItemForm component renders the complete form 1`] = `
       <input
         id="folder-name-input"
         name="folder-name"
+        required={true}
         type="text"
       />
     </div>
